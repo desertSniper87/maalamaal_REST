@@ -13,6 +13,9 @@ stdenv.mkDerivation rec {
     # Add packages from nix-env -qaP | grep -i needle queries
     # With Python configuration requiring a special wrapper
     postgresql_10
+    zlib
+    zlib.dev
+    python37Packages.pillow
     (python37.buildEnv.override {
       ignoreCollisions = true;
       extraLibs = with python37Packages; [
