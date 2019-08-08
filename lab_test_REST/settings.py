@@ -25,7 +25,7 @@ SECRET_KEY = 'os^+3j@q1s=0kfge8xjz%n*x&5f24o73qtb_6^zjf@zwwdx(84'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '127.0.0.2']
 
 
 # Application definition
@@ -40,19 +40,31 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
 
+    'lab_test_REST',
     'products'
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+CORS_ORIGIN_WHITELIST = (
+    'http://127.0.0.1:8001',
+)
+CORS_ORIGIN_REGEX_WHITELIST = (
+    'http://127.0.0.1:8001',
+)
 
 ROOT_URLCONF = 'lab_test_REST.urls'
 
