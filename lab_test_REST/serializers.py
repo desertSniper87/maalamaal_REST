@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User, Group
-from requests import Response
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
 from rest_framework.validators import UniqueValidator
@@ -33,10 +32,6 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
 
         return user
 
-class TokenSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Token
-        fields = ('key', 'user')
 
 class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
