@@ -6,10 +6,11 @@ from .models import Product
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     category = serializers.CharField()
+    seller = serializers.CharField()
 
     class Meta:
         model = Product
-        fields = ('image', 'name', 'description', 'available_quantity', 'price_taka', 'category', 'timestamp')
+        fields = ('image', 'name', 'description', 'seller', 'available_quantity', 'price_taka', 'category', 'timestamp')
 
     def create(self, validated_data):
         user = self.context['request'].user
