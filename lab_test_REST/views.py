@@ -23,6 +23,10 @@ class UserViewSet(viewsets.ModelViewSet):
         token = Token.objects.create(user=user)
         print(f'token.key: {token.key}')
         data['token'] = str(token)
+
+        group = user.groups.first()
+        data['account_type'] = group.name
+
         headers = self.get_success_headers(data)
         return Response(data, status=status.HTTP_201_CREATED, headers=headers)
 

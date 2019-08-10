@@ -1,8 +1,9 @@
-from django.contrib.auth.models import User
-from django.db import models
+from django.contrib.auth.models import User, Group
 
 
-# class UserProfile(models.Model):
-#   user = models.OneToOneField(User, related_name="profile", on_delete=models.CASCADE)
-#   role = models.CharField(choices=['buyer', 'seller'])
-
+# class UserMethods(User):
+#     class Meta:
+#         proxy = True
+#     def get_role(self):
+#         groups = self.groups.first()
+#         return Group.objects.get(id=self.id)

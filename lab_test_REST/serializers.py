@@ -12,7 +12,7 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
     email = serializers.EmailField(required=True, validators=[UniqueValidator(queryset=User.objects.all())])
     username = serializers.CharField( validators=[UniqueValidator(queryset=User.objects.all())])
     account_type = serializers.CharField(write_only=True)
-    password = serializers.CharField(min_length=8)
+    password = serializers.CharField(write_only=True, min_length=8)
 
     def create(self, validated_data):
         print(validated_data)
