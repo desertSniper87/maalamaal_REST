@@ -1,15 +1,9 @@
-from django.shortcuts import render
-
-from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
-from products.models import ProductCategory
-from products.serializers import ProductCategorySerializers
-from .models import Product #, ProductType
-from .serializers import ProductSerializer #, ProductTypeSerializer
+from .models import Product, ProductCategory
+from .serializers import ProductSerializer, ProductCategorySerializers
 
-
-# Create your views here.
 
 class ProductViewSet(viewsets.ModelViewSet):
     """
@@ -17,6 +11,21 @@ class ProductViewSet(viewsets.ModelViewSet):
     """
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
+
+    permission_classes_by_action = {'create': [IsAuthenticated]}
+
+    def create(self, request, *args, **kwargs):
+        return super(ProductViewSet, self).create(request, *args, **kwargs)
+
+
+    def get_permissions(self):
+        try:
+            # return permission_classes depending on `action`
+            return [permission() for permission in self.permission_classes_by_action[self.action]]
+        except KeyError:
+            # action is not set return default permission_classes
+            return [permission() for permission in self.permission_classes]
+
 
 class ProductCategoryViewSet(viewsets.ModelViewSet):
     """
