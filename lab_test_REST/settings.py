@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'lab_test_REST',
-    'products'
+    'products',
+    'carts',
+    'orders',
 ]
 
 REST_FRAMEWORK = {

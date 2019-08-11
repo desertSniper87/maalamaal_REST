@@ -21,12 +21,16 @@ from django.urls import path
 from rest_framework import routers
 from lab_test_REST import views as user_views
 from products import views as product_views
+from carts import views as cart_views
+from orders import views as order_views
 
 router = routers.DefaultRouter()
 router.register(r'users', user_views.UserViewSet)
 router.register(r'groups', user_views.GroupViewSet)
 router.register(r'products', product_views.ProductViewSet)
 router.register(r'product_categories', product_views.ProductCategoryViewSet)
+router.register(r'carts', cart_views.CartViewSet)
+router.register(r'orders', order_views.OrderViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
