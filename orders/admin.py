@@ -5,4 +5,4 @@ class OrderAdmin(admin.ModelAdmin):
     # list_display = ['user', 'product', 'quantity', 'total']
     pass
 
-# admin.site.register(Cart, CartAdmin)
+admin.site.register(Order, OrderAdmin)

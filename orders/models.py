@@ -3,13 +3,17 @@ from django.db import models
 
 class Order(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
-    cart = models.ForeignKey('carts.Cart', on_delete=models.SET_NULL,
-                             blank=True, null=True)
-    status = models.CharField(max_length=120, default='created')
+    cart = models.ManyToManyField('carts.Cart',
+                             blank=True)
     order_total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
+    paid = models.BooleanField(default=False)
 
     def __str__(self):
         return self.id
+
+    @property
+    def get_seller(self):
+        pass
 
 # def post_save_cart_total(sender, instance, created, *args, **kwargs):
 #     if not created:  # The sender is Cart. Cart pre-exist. So we find the cart.

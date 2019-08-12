@@ -1,31 +1,20 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
-from products.models import ProductCategory
-from .models import Product
+from .models import Order
 
-class ProductSerializer(serializers.HyperlinkedModelSerializer):
-    category = serializers.CharField()
-    seller = serializers.CharField()
+
+class OrderSerializer(serializers.HyperlinkedModelSerializer):
+    order_total = serializers.ReadOnlyField()
+    user = serializers.ReadOnlyField(source='user.username')
+    cart = serializers.HyperlinkedIdentityField(
+        read_only=True,
+        many=True, view_name='cart-detail'
+    )
+    paid = serializers.ReadOnlyField()
+
 
     class Meta:
-        model = Product
-        fields = ('image', 'name', 'description', 'seller', 'available_quantity', 'price_taka', 'category', 'timestamp')
+        model = Order
+        fields = ['order_total', 'user', 'paid', 'cart']
 
-    def create(self, validated_data):
-        user = self.context['request'].user
-        validated_data['seller'] = user
-
-        category = ProductCategory.objects.get(name=validated_data['category'])
-        validated_data['category'] = category
-
-        return super(ProductSerializer, self).create(validated_data)
-
-    def update(self, instance, validated_data):
-        return super(ProductSerializer, self).update(instance, validated_data)
-
-class ProductCategorySerializers(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = ProductCategory
-        fields = '__all__'
 
