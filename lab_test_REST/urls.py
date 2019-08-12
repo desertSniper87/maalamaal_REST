@@ -20,6 +20,7 @@ from django.contrib import admin
 from django.urls import path
 from rest_framework import routers
 from lab_test_REST import views as user_views
+from lab_test_REST.views import login
 from products import views as product_views
 from carts import views as cart_views
 from orders import views as order_views
@@ -38,4 +39,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
+    # Extra function based views
+    path('login/', login)
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

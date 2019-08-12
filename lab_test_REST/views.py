@@ -1,4 +1,6 @@
 from django.contrib.auth.models import User, Group
+from django.views.decorators.http import require_POST
+from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import viewsets, status
 from rest_framework.authtoken.models import Token
@@ -31,6 +33,14 @@ class UserViewSet(viewsets.ModelViewSet):
         return Response(data, status=status.HTTP_201_CREATED, headers=headers)
 
 
+@api_view(http_method_names=['POST'])
+def login(request):
+    user = User.objects.get(username=request.data.get('username'))
+    token_key = Token.objects.get(user=user).key
+    return Response({
+        'username': user.username,
+        'token': token_key
+    })
 
 class GroupViewSet(viewsets.ModelViewSet):
     """
