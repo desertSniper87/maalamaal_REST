@@ -36,9 +36,16 @@ class UserViewSet(viewsets.ModelViewSet):
 @api_view(http_method_names=['POST'])
 def login(request):
     user = User.objects.get(username=request.data.get('username'))
+    password = request.data.get('password')
+    if user.password != password:
+        return Response({
+            'status': 'error',
+            'message': 'password authentication error'
+        })
     token_key = Token.objects.get(user=user).key
     return Response({
         'username': user.username,
+        'account_type': user.groups.first().name,
         'token': token_key
     })
 

@@ -1,16 +1,17 @@
-from django.contrib.auth.models import User, Group
 from rest_framework import serializers
 
 from products.models import ProductCategory
 from .models import Product
 
+
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     category = serializers.CharField()
     seller = serializers.CharField()
+    id = serializers.ReadOnlyField()
 
     class Meta:
         model = Product
-        fields = ('image', 'name', 'description', 'seller', 'available_quantity', 'price_taka', 'category', 'timestamp')
+        fields = ('id', 'image', 'name', 'description', 'seller', 'available_quantity', 'price_taka', 'category', 'timestamp')
 
     def create(self, validated_data):
         user = self.context['request'].user

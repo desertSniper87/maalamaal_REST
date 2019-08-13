@@ -1,21 +1,7 @@
-import os
 from django.contrib.auth.models import User
 
 from django.db import models
-from random import randint
 
-
-# def get_filename_ext(filepath):
-#     base_name = os.path.basename(filepath)
-#     name, ext = os.path.splitext(filepath)
-#     return name, ext
-
-# def upload_image_path(instance, filename):
-#     new_filename = randint(0, 3000)
-#     name, ext = get_filename_ext(filename)
-#     final_filename = f'{new_filename}{ext}'
-#     print(new_filename, final_filename, ext)
-#     return f"products/{new_filename}/{final_filename}"
 
 class ProductCategory(models.Model):
     name = models.CharField(max_length=120)

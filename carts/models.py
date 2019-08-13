@@ -14,13 +14,21 @@ class Cart(models.Model):
     ordered = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
     timestamp = models.DateTimeField(auto_now_add=True)
-
     def __str__(self):
         return str(self.id)
 
     def save(self, *args, **kwargs):
         if self.product is not None:
-            self.total = self.product.price_taka * self.quantity
+            max_quantity = self.product.available_quantity
+            try:
+                prev_cart = Cart.objects.get(user=self.user, product=self.product)
+                if prev_cart.quantity + self.quantity <= max_quantity:
+                    prev_cart.quantity += self.quantity
+                    prev_cart.total += float(prev_cart.product.price_taka * prev_cart.quantity)
+                    return prev_cart
+            except Cart.DoesNotExist:
+                pass
+            self.total += float(self.product.price_taka * self.quantity)
         return super(Cart, self).save(*args, **kwargs)
 
     @property
