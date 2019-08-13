@@ -136,10 +136,9 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': os.environ.get('MYSQL_DB', 'maalamaal_rest'),
-            'USER': os.environ.get('MYSQL_USER', 'maalamaal_rest'),
-            'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'maalamaal_rest'),
-            'HOST': os.environ.get('MYSQL_HOST', '127.0.0.1'),
-            'PORT': 5432,
+            'USER': os.environ.get('MYSQL_USER', 'maalamaal'),
+            'PASSWORD': os.environ.get('MYSQL_PASSWORD', '1a2b3c4d'),
+            'HOST': os.environ.get('MYSQL_HOST', 'maalamaal.mysql.pythonanywhere-services.com'),
         }
     }
 
