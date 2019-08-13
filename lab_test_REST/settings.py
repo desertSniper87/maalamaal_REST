@@ -121,16 +121,28 @@ if DATABASE_URL:
         'default': dj_database_url.config(default=DATABASE_URL)
     }
 else:
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.postgresql',
+    #         'NAME': os.environ.get('PG_DB', 'maalamaal_rest'),
+    #         'USER': os.environ.get('PG_USER', 'maalamaal_rest'),
+    #         'PASSWORD': os.environ.get('PG_PASSWORD', 'maalamaal_rest'),
+    #         'HOST': os.environ.get('PG_HOST', '127.0.0.1'),
+    #         'PORT': 5432,
+    #     }
+    # }
+
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('PG_DB', 'maalamaal_rest'),
-            'USER': os.environ.get('PG_USER', 'maalamaal_rest'),
-            'PASSWORD': os.environ.get('PG_PASSWORD', 'maalamaal_rest'),
-            'HOST': os.environ.get('PG_HOST', '127.0.0.1'),
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('MYSQL_DB', 'maalamaal_rest'),
+            'USER': os.environ.get('MYSQL_USER', 'maalamaal_rest'),
+            'PASSWORD': os.environ.get('MYSQL_PASSWORD', 'maalamaal_rest'),
+            'HOST': os.environ.get('MYSQL_HOST', '127.0.0.1'),
             'PORT': 5432,
         }
     }
+
 
 
 
