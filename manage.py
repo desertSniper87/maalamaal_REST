@@ -1,5 +1,5 @@
-#!./result/bin/python
-# #!/usr/bin/env python
+#!/usr/bin/env python
+# #!./result/bin/python
 # #!/nix/store/96p42644i76jqgdkxjgyl3f0c8n8k16j-python3-3.7.4/bin/python
 import os
 import sys
