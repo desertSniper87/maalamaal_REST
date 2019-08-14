@@ -22,14 +22,5 @@ class Product(models.Model):
                                  on_delete=models.SET_NULL)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    # objects = ProductManager()
-    #
-    # def get_absolute_url(self):
-    #     return reverse("products:detail", kwargs={"slug": self.slug})
-    #
     def __str__(self):
         return self.name
-    #
-    # @property
-    # def name(self):
-    #     return self.title

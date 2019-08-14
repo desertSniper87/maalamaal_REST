@@ -6,7 +6,7 @@ from .models import Product
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     category = serializers.CharField()
-    seller = serializers.CharField()
+    seller = serializers.CharField(read_only=True)
     id = serializers.ReadOnlyField()
 
     class Meta:
