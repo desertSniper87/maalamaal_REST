@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -6,6 +7,8 @@ class Order(models.Model):
     carts = models.ManyToManyField('carts.Cart', blank=True)
     order_total = models.DecimalField(default=0.00, max_digits=100, decimal_places=2)
     paid = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(default=datetime.now)
+
 
     # def save(self, *args, **kwargs):
     #     return super(Order, self).save(*args, **kwargs)
