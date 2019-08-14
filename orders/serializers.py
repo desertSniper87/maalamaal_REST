@@ -1,20 +1,20 @@
 from rest_framework import serializers
 
+from carts.serializers import CartSerializer
 from .models import Order
 
 
 class OrderSerializer(serializers.HyperlinkedModelSerializer):
+    id = serializers.ReadOnlyField()
     order_total = serializers.ReadOnlyField()
     user = serializers.ReadOnlyField(source='user.username')
-    carts = serializers.HyperlinkedIdentityField(
-        read_only=True,
-        many=True, view_name='cart-detail'
-    )
+    carts = CartSerializer(many=True, read_only=True)
     paid = serializers.ReadOnlyField()
-
+    timestamp = serializers.DateTimeField(read_only=True, format="%d %b, %H:%M")
 
     class Meta:
         model = Order
-        fields = ['order_total', 'user', 'paid', 'carts']
+        depth = 1
+        fields = ['id', 'order_total', 'user', 'paid', 'carts', 'timestamp']
 
 
