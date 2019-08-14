@@ -2,6 +2,6 @@
 django~=2.1
 djangorestframework
 djangorestframework-jwt
-psycopg2
+psycopg2-binary
 pillow
 django-cors-headers~=3.0.2
