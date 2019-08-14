@@ -2,8 +2,8 @@ from rest_framework import viewsets, status
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 
-from carts.models import Cart
-from carts.serializers import CartSerializer
+from .models import Cart
+from .serializers import CartSerializer
 
 
 class CartViewSet(viewsets.ModelViewSet):
