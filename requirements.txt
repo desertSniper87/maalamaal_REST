@@ -1,4 +1,5 @@
 #cryptography
+gunicorn
 django~=2.1
 djangorestframework
 djangorestframework-jwt
