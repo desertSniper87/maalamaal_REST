@@ -1,2 +1,2 @@
-web: gunicorn djangoherokuapp.wsgi --log-file -
+web: gunicorn lab_test_REST.wsgi --log-file -
 
