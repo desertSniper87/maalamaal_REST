@@ -18,7 +18,7 @@ class CartViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         user = request.user
-        queryset = Cart.objects.filter(user=user)
+        queryset = Cart.objects.filter(user=user, ordered=False)
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = self.get_serializer(page, many=True)

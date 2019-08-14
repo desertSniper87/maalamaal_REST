@@ -23,13 +23,16 @@ class OrderViewSet(viewsets.ModelViewSet):
             order_total += cart.total
             cart.save()
 
+            cart.product.available_quantity -= cart.quantity
+            cart.product.save()
+
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         # self.perform_create(serializer)
         serializer.save(
             user=user,
             order_total=order_total,
-            cart=user_carts,
+            carts=user_carts,
             paid=True
         )
         headers = self.get_success_headers(serializer.data)
