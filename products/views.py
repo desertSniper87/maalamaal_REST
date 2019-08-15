@@ -37,8 +37,6 @@ class ProductViewSet(viewsets.ModelViewSet):
         return super(ProductViewSet, self).list(request, *args, **kwargs)
 
 
-
-
 class ProductCategoryViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows product categories to be viewed or edited.
