@@ -7,3 +7,4 @@ pillow
 django-cors-headers~=3.0.2
 dj-database-url
 whitenoise
+django_rest_passwordreset

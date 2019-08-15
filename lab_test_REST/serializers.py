@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import serializers
+from rest_framework.exceptions import NotFound
 from rest_framework.validators import UniqueValidator
 
 
@@ -17,17 +18,19 @@ class UserSerializer(serializers.HyperlinkedModelSerializer):
         print(validated_data)
         try:
             user = User.objects.create(username=validated_data['username'],
-                                       email=validated_data['email'],
-                                       password=validated_data['password'])
+                                       email=validated_data['email'])
         except AssertionError as a:
             print(a)
 
 
-        # try:
-        user_group = Group.objects.get(name=validated_data['account_type'])
-        user.groups.set([user_group])
-        user.save()
-        # except Not
+        try:
+            user_group = Group.objects.get(name=validated_data['account_type'])
+            user.groups.set([user_group])
+            user.set_password(validated_data['password'])
+            user.save()
+        except NotFound as n:
+            print(f'Not found {n}')
+
 
         return user
 

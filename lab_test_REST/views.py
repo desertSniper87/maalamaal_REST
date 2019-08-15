@@ -1,5 +1,4 @@
 from django.contrib.auth.models import User, Group
-from django.views.decorators.http import require_POST
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import viewsets, status
@@ -36,18 +35,20 @@ class UserViewSet(viewsets.ModelViewSet):
 @api_view(http_method_names=['POST'])
 def login(request):
     user = User.objects.get(username=request.data.get('username'))
-    password = request.data.get('password')
-    if user.password != password:
+    raw_password = request.data.get('password')
+    if user.check_password(raw_password) is False:
         return Response({
             'status': 'error',
-            'message': 'password authentication error'
+            'message': 'Password authentication error.',
+        },status=status.HTTP_401_UNAUTHORIZED)
+    else:
+        token_key = Token.objects.get(user=user).key
+        return Response({
+            'status': 'success',
+            'username': user.username,
+            'account_type': user.groups.first().name,
+            'token': token_key
         })
-    token_key = Token.objects.get(user=user).key
-    return Response({
-        'username': user.username,
-        'account_type': user.groups.first().name,
-        'token': token_key
-    })
 
 class GroupViewSet(viewsets.ModelViewSet):
     """

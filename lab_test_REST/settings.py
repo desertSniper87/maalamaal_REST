@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'rest_framework_jwt',
     'rest_framework.authtoken',
     'corsheaders',
+    'django_rest_passwordreset',
 
     'lab_test_REST',
     'products',

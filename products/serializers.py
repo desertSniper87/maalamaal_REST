@@ -25,7 +25,9 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
     def update(self, instance, validated_data):
         return super(ProductSerializer, self).update(instance, validated_data)
 
+
 class ProductCategorySerializers(serializers.HyperlinkedModelSerializer):
+    id = serializers.ReadOnlyField()
     class Meta:
         model = ProductCategory
         fields = '__all__'

@@ -41,8 +41,24 @@ class OrderViewSet(viewsets.ModelViewSet):
         headers = self.get_success_headers(serializer.data)
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
 
-    # def list(self, request, *args, **kwargs):
-    #     return super(OrderViewSet, self).list(request, *args, **kwargs)
+    def list(self, request, *args, **kwargs):
+        user = request.user
+        user_type = request.user.groups.all().first().name
+        if user_type == 'seller':
+            print('Order may contain carts of other sellers')
+            queryset = Order.objects.filter(carts__product__seller_id=user.id)
+        else:
+            queryset = Order.objects.filter(user=user)
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data)
+
+
+
 
 
 
