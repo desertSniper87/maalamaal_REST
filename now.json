@@ -1,0 +1,13 @@
+{
+    "version": 2,
+    "name": "now-maalamaal-rest",
+    "builds": [{
+        "src": "lab_test_REST/wsgi.py",
+        "use": "@ardnt/now-python-wsgi",
+        "config": { "maxLambdaSize": "15mb" }
+    }],
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "lab_test_REST/wsgi.py"
+    }]
+}
