@@ -25,7 +25,7 @@ SECRET_KEY = 'os^+3j@q1s=0kfge8xjz%n*x&5f24o73qtb_6^zjf@zwwdx(84'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '127.0.0.2']
+ALLOWED_HOSTS = ['0.0.0.0', '127.0.0.1', '127.0.0.2', 'vercel.com']
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
